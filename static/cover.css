@@ -101,9 +101,25 @@ body {
     color: white;
 }
 
+.conatiner-table {
+  font-family: "Poppins", serif;
+  width: auto;
+  margin: 30px;
+}
+
+.table-dark td, .table .table-dark th, .table-dark thead th {
+  border-color: #32383e;
+  font-size: 12px;
+}
+
 .container-1 {
   margin: 30px;
 
+}
+
+.data-download {
+  margin: 20px;
+  font-family: "Poppins", serif;
 }
 
 .contacts-title {
@@ -169,4 +185,20 @@ body {
 
 .custom-shape-divider-bottom-1613517362 .shape-fill {
   fill: #FFFFFF;
+}
+
+.btn {
+  background-color: black;
+  border: 2px solid rgba(183,135,223,1);
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+  
+  /* box-shadow: -2px 2px purple; */
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: rgb(33, 33, 32);
 }
