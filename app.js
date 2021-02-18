@@ -66,13 +66,11 @@ d3.csv('../flask_app/sfdata.csv').then(importedData => {
 
       }
     },
-    cornerroundness: 
-      { "bottomleft": 0, "bottomright": 0, "topleft": 1, "topright": 1 }
+    // cornerroundness: 
+    //   { "bottomleft": 0, "bottomright": 0, "topleft": 1, "topright": 1 }
   }
   const data = [trace1];
   
   Plotly.newPlot('bar', data, layout);
-
-  console.log(yearCount)
 })
 
