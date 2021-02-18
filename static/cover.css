@@ -17,7 +17,15 @@
  */
 
 body {
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  /* box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5); */
+}
+
+.contacts-body {
+  width: fit-content;
+}
+
+.row.featurette {
+  align-items: center;
 }
 
 .cover-container {
@@ -97,7 +105,7 @@ body {
     text-align: center;
     padding: 78px;
     font-family: "Poppins", serif;
-    background-color: black;
+    /* background-color: black; */
     color: white;
 }
 
@@ -163,7 +171,7 @@ body {
 
 .section-color-black {
   background-color: black;
-  height: 300px;
+  height: 350px;
 }
 
 .custom-shape-divider-bottom-1613517362 {
@@ -187,13 +195,14 @@ body {
   fill: #FFFFFF;
 }
 
-.btn {
+.btn-download {
   background-color: black;
   border: 2px solid rgba(183,135,223,1);
   color: white;
   padding: 12px 30px;
   cursor: pointer;
   font-size: 20px;
+  border-radius: 3px;
   
   /* box-shadow: -2px 2px purple; */
 }
