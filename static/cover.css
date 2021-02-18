@@ -178,10 +178,9 @@
 }
 
 .section-color-black {
-  /* background-color: black; */
   height: auto;
-  background: url(background.jpg);
-  background-image: url("background.jpg");
+  background:black;
+
 }
 
 
