@@ -25,7 +25,7 @@
             <a class="nav-link" href="index.html" style="color: lightgray">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: lightgray">Graphs</a>
+            <a class="nav-link" href="charts.html" style="color: lightgray">Graphs</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="data.html" style="color: white">Data</a>
@@ -51,7 +51,7 @@
       function getData(data) {
         let allRows = data.split("\n");
         var table = '<table class="conatiner-table table table-dark table-striped table-hover">';
-          for (var singleRow=0; singleRow < allRows.length; singleRow++) {
+          for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
             if(singleRow === 0) {
               table += "<thead>";
               table += "<tr>";
@@ -59,9 +59,8 @@
               table += "<tr>";
             }
             var rowCells = allRows[singleRow].split(',');
-            console.log(rowCells)
-            for (var rowSingleCell=0; rowSingleCell < rowCells.length; rowSingleCell++) {
-              if(singleRow ===0) {
+            for (var rowSingleCell = 0; rowSingleCell < rowCells.length; rowSingleCell++) {
+              if(singleRow === 0) {
                 table += "<th>";
                 table += rowCells[rowSingleCell];
               } else {
