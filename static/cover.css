@@ -292,3 +292,11 @@ path:hover {
   z-index: 2;
 }
 
+
+/* bar chart display */
+
+#bar {
+  justify-content: space-around;
+  display: flex;
+  background: black;
+}
