@@ -1,4 +1,4 @@
-d3.csv('../templates/resources/sfdata.csv').then((importedData) => {
+d3.csv('/templates/resources/sfdata.csv').then((importedData) => {
   const csvData = importedData;
 
   let yearCount = {};
