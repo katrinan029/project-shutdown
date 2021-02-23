@@ -1,6 +1,27 @@
 // Store our API endpoint inside queryUrl
+var parseTime = d3.timeParse("%Y-%m-%d");
+
 d3.json("/get_data").then(response => {
    console.log(response);
+
+   // console.log(response);
+   // console.log(response[111].busi_end_dt);
+   // console.log(response[101].latitude)
+   console.log(response);
+   console.log("business_name", response[1].business_name)
+   console.log("busi_start_dt", response[1].busi_start_dt)
+   console.log("busi_end_dt", response[1].busi_end_dt)
+   
+   if (response[1].busi_end_dt===""){
+     console.log("busi_end_dt IS EMPTY")
+     newDate="UNKNOWN"
+     var year = "UNKNOWN"
+   }else{
+     newDate=parseTime(response[1].busi_end_dt)
+     var year =  new Date(response[1].busi_end_dt).getFullYear()
+   }
+   console.log(newDate)
+   console.log(year)
 
 var myMap = L.map("map", {
     center: [37.7749, -122.4194],
@@ -17,7 +38,7 @@ var myMap = L.map("map", {
     accessToken: API_KEY
   }).addTo(myMap);
   
-      for (var i = 0; i < 50; i++) {
+      for (var i = 0; i < 10; i++) {
         var new_coord = [response[i].latitude, response[i].longitude]
         
         L.marker(new_coord)
