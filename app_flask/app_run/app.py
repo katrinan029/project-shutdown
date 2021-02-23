@@ -22,10 +22,10 @@ def home():
 def data_sf():
     print('Working')
     #Establish connection with the database
-    engine = create_engine('postgresql://postgres:'+ pswd + '@localhost:5432/sf_db')
+    engine = create_engine('postgresql://postgres:'+ pswd + '@localhost:5432/sfbusiness_db')
     connection = engine.connect()
 
-    results = pd.read_sql('SELECT * FROM final_lucky LIMIT 20', connection)
+    results = pd.read_sql('SELECT * FROM sf_business LIMIT 20', connection)
     
     return jsonify((results).to_dict("record"))
 
