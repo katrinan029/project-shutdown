@@ -18,6 +18,22 @@ app = Flask(__name__)
 def home():
     return render_template("index_app.html")
 
+
+@app.route("/original_data")
+def original_sf():
+
+    #Establish connection with the database
+    engine = create_engine('postgresql://postgres:'+ pswd + '@localhost:5432/original_db')
+    connection = engine.connect()
+
+    original_results = pd.read_sql('SELECT * FROM original_table limit 10', connection)
+
+    return jsonify((original_results).to_dict("record"))
+
+
+
+
+
 @app.route("/get_data")
 def data_sf():
     print('Working')

@@ -1,57 +1,57 @@
 // Store our API endpoint inside queryUrl
 var parseTime = d3.timeParse("%Y-%m-%d");
 
-d3.json("/get_data").then(response => {
+d3.json("/original_data").then(response => {
    
   console.log(response);
 
-  // var chooseYear = response.filter(x=>x.busistart_year === '2010');
-  var count = response.busi_count;
-  console.log(count)
-  var busitype = response.busi_type;
-  console.log(busitype)
+//   // var chooseYear = response.filter(x=>x.busistart_year === '2010');
+//   var count = response.busi_count;
+//   console.log(count)
+//   var busitype = response.busi_type;
+//   console.log(busitype)
 
 
-  console.log(response);
-  console.log(response[1].busi_start_year);
- console.log(response[1].busi_type);
- console.log(response[1].busi_count);
+//   console.log(response);
+//   console.log(response[1].busi_start_year);
+//  console.log(response[1].busi_type);
+//  console.log(response[1].busi_count);
 
-  businesstype = [];
-  businesscount= [];
-  extra = []
+//   businesstype = [];
+//   businesscount= [];
+//   extra = []
 
- for (var i=0; len = response.length, i<len; i++){
-   if (response[i].busi_start_year === '2010'){
-     console.log('greater')
-     businesstype.push(response[i].busi_type);
-     businesscount.push(response[i].busi_count);}
-    else {extra.push(response[i].busi_count);}
+//  for (var i=0; len = response.length, i<len; i++){
+//    if (response[i].busi_start_year === '2010'){
+//      console.log('greater')
+//      businesstype.push(response[i].busi_type);
+//      businesscount.push(response[i].busi_count);}
+//     else {extra.push(response[i].busi_count);}
 
-    console.log(businesstype);
-    console.log(businesscount);
+//     console.log(businesstype);
+//     console.log(businesscount);
 
     
   
   
 
 
-  var trace1 = {
-   x: businesstype,
-   y: businesscount,
-   type: "bar"
- };
+//   var trace1 = {
+//    x: businesstype,
+//    y: businesscount,
+//    type: "bar"
+//  };
  
- var data = [trace1];
+//  var data = [trace1];
  
- var layout = {
-   title: "'Bar' Chart"
- };
+//  var layout = {
+//    title: "'Bar' Chart"
+//  };
  
- Plotly.newPlot("map", data, layout);
+//  Plotly.newPlot("map", data, layout);
 
    
-  }
+//   }
 // Create an array of music provider labels
 // var labels = Object.keys(data.us);
 
