@@ -2,16 +2,18 @@ var value = d3.json("/combined_data").then(jsonData => {
     // console.log(jsonData);
   
     
-    neighBorHood= [];
-    // extra2 = [];
+    var neighBorHood= [];
+    var extra2 = [];
 
     
 
    for (var i=0; len = jsonData.length, i<len; i++){
-    if (jsonData[i].neighborhood) not in neighBorHood{
-    
-    neighBorHood.append(item)
-    }
+       var item = jsonData[i].neighborhood
+        if(neighBorHood.indexOf(item) !== -1){
+            neighBorHood.push(item)
+        } else{
+            extra2.push(item)
+        }
 }
         var dropdownMenu = d3.select('#selDataset').selectAll('option');
         dropdownMenu
@@ -25,43 +27,43 @@ var value = d3.json("/combined_data").then(jsonData => {
      
   });
   
-  function optionChanged(year){
+  function optionChanged(selected){
   
 
 d3.json("/combined_data").then(response => {
    
     console.log(response);
 
-//   businesstype = [];
-//   businesscount= [];
-//   extra = []
+  businesstype = [];
+  businesscount= [];
+  extra = []
 
-//  for (var i=0; len = response.length, i<len; i++){
-//   // var selectedYear = response[i].busi_start_year === year;
+ for (var i=0; len = response.length, i<len; i++){
+  // var selectedYear = response[i].busi_start_year === year;
 
-//    if (response[i].busi_start_year === year){
-//      businesstype.push(response[i].busi_type);
-//      businesscount.push(response[i].busi_count);}
-//     else {extra.push(response[i].busi_count);}
-//    };
-//     // console.log(businesstype);
-//     // console.log(businesscount);
+   if (response[i].neighborhood === selected){
+     businesstype.push(response[i].busi_type);
+     businesscount.push(response[i].busi_count);}
+    else {extra.push(response[i].busi_count);}
+   };
+    // console.log(businesstype);
+    // console.log(businesscount);
   
-//   var trace1 = {
-//    x: businesstype,
-//    y: businesscount,
-//    type: "bar"
-//  };
+  var trace1 = {
+   x: businesstype,
+   y: businesscount,
+   type: "bar"
+ };
  
-//  var data = [trace1];
+ var data = [trace1];
  
-//  var layout = {
-//    title: "Business Types Chart for a selected location start year",
-//    xaxis: { title: "Business Types"},
-//   yaxis: { title: "No. of Businesses"}
-//  };
+ var layout = {
+   title: "Business Types Chart for a selected neighborhood",
+   xaxis: { title: "Business Types"},
+  yaxis: { title: "No. of Businesses"}
+ };
  
-//  Plotly.newPlot("bar", data, layout);
+ Plotly.newPlot("bar", data, layout);
 
   
 });

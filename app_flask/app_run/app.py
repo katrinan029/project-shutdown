@@ -16,7 +16,18 @@ app = Flask(__name__)
 # Flask Routes
 @app.route("/")
 def home():
-    return render_template("combined_t.html")
+    return render_template("index.html")
+
+    
+@app.route('/charts')
+def about():
+  return render_template('charts.html')
+
+@app.route('/contacts')
+def about():
+  return render_template('contacts.html')
+
+
 
 # ***************************************************************
 # ***************************************************************

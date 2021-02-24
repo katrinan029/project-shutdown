@@ -77,9 +77,9 @@ d3.json("/neigh_bar").then(response => {
    
     // console.log(response);
 
-  neighBor = [];
-  countNeigh= [];
-  extra1 = []
+  var neighBor = [];
+  var countNeigh= [];
+  var extra1 = []
 
  for (var i=0; len = response.length, i<len; i++){
    if (response[i].busi_start_year === year){
