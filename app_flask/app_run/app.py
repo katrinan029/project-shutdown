@@ -44,10 +44,23 @@ def data_sf():
     # Group by year and value count by business type
     business_final = year_df.groupby(['busi_start_year'])['busi_type'].apply(pd.Series.value_counts)
     busitype_final = business_final.to_frame().reset_index().rename(columns={"level_1":"busi_type","busi_type":"busi_count"})
+
     # Filter values for years > 2009
     busitype_final = busitype_final[ busitype_final['busi_start_year'] >'2009' ]
 
-    return jsonify((busitype_final).to_dict('records'))
+    # #Convert columns to array
+    # busistart_year_arr = busitype_final['busi_start_year'].to_list()
+    # busiype_arr = busitype_final['busi_type'].to_list()
+    # busicount_arr = busitype_final['busi_count'].to_list()
+
+    # busitype_dict = {'busistart_year':busistart_year_arr,
+    #                 'busitype': busiype_arr,
+    #                 'busicount': busicount_arr }
+
+    # json_data = json.dumps(busitype_dict)
+    # return(json_data)
+
+    return jsonify((busitype_final).to_dict("record"))
     
     # return jsonify((results).to_dict("record"))
 
