@@ -54,11 +54,11 @@ def busi_bar_t():
     results1 = pd.read_sql('SELECT * FROM sf_business', connection)
 
     # Group by business type and value count by business start date
-    business_group = results1.groupby(['busi_type'])['busi_start_dt'].apply(pd.Series.value_counts)
-    business_frame = business_group.to_frame().reset_index().rename(columns={"level_1":"busi_start_dt","busi_start_dt":"busi_count"})
+    business_group = results1.groupby(['busi_type'])['loc_start_dt'].apply(pd.Series.value_counts)
+    business_frame = business_group.to_frame().reset_index().rename(columns={"level_1":"loc_start_dt","loc_start_dt":"busi_count"})
 
     #Split year from business start date
-    fix = list(business_frame["busi_start_dt"])
+    fix = list(business_frame["loc_start_dt"])
     fix2 = [x.split("/") for x in fix]
     busi_start_year_list = [x[2] for x in fix2]
     newcol = pd.DataFrame(busi_start_year_list)
@@ -87,11 +87,11 @@ def neigh_bar_t():
     results2 = pd.read_sql('SELECT * FROM sf_business', connection)
 
     # Groupby neighborhood
-    neighborhood_group = results2.groupby(['neighborhood'])['busi_start_dt'].apply(pd.Series.value_counts)
-    neighborhood_frame=neighborhood_group.to_frame().reset_index().rename(columns={"level_1":"busi_start_dt","busi_start_dt":"busi_count"})
+    neighborhood_group = results2.groupby(['neighborhood'])['loc_start_dt'].apply(pd.Series.value_counts)
+    neighborhood_frame=neighborhood_group.to_frame().reset_index().rename(columns={"level_1":"loc_start_dt","loc_start_dt":"busi_count"})
 
     #Split year from date
-    fix_n = list(neighborhood_frame["busi_start_dt"])
+    fix_n = list(neighborhood_frame["loc_start_dt"])
     fix_n2 = [x.split("/") for x in fix_n]
     busi_start_year_neighborhood = [x[2] for x in fix_n2]
     newcol_n = pd.DataFrame(busi_start_year_neighborhood)
