@@ -27,13 +27,27 @@ def data_sf():
 
     results = pd.read_sql('SELECT * FROM sf_business', connection)
 
-    # Create dictionary for business type counts fo
+    # Group by business type and value count by business start date
     business_group = results.groupby(['busi_type'])['busi_start_dt'].apply(pd.Series.value_counts)
     business_frame = business_group.to_frame().reset_index().rename(columns={"level_1":"busi_start_dt","busi_start_dt":"busi_count"})
-    # busitype_yearcount = business_frame.set_index('busi_type')
-    # busi_type_dict = business_index.to_dict('index')
 
-    return jsonify((business_frame).to_dict('records'))
+    #Split year from business start date
+    fix = list(business_frame["busi_start_dt"])
+    fix2 = [x.split("/") for x in fix]
+    busi_start_year_list = [x[2] for x in fix2]
+    newcol = pd.DataFrame(busi_start_year_list)
+
+    # Concat split year with business type df
+    year_df = pd.concat([business_frame, newcol], axis=1)
+    year_df = year_df.rename(columns={0:"busi_start_year"})
+
+    # Group by year and value count by business type
+    business_final = year_df.groupby(['busi_start_year'])['busi_type'].apply(pd.Series.value_counts)
+    busitype_final = business_final.to_frame().reset_index().rename(columns={"level_1":"busi_type","busi_type":"busi_count"})
+    # Filter values for years > 2009
+    busitype_final = busitype_final[ busitype_final['busi_start_year'] >'2009' ]
+
+    return jsonify((busitype_final).to_dict('records'))
     
     # return jsonify((results).to_dict("record"))
 

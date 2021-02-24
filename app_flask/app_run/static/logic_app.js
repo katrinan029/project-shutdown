@@ -3,13 +3,9 @@ var parseTime = d3.timeParse("%Y-%m-%d");
 
 d3.json("/get_data").then(response => {
    console.log(response);
-
-   for (var i=0;  i<21; i++){
-  //  var startDate=parseTime(response[i].busi_start_dt)
-
-   var businessStartDate = new Date (response[i].busi_start_dt).getFullYear()
-   console.log(businessStartDate)
-   }
+   console.log(response[1].busi_start_year);
+  console.log(response[1].busi_type);
+  console.log(response[1].busi_count);
 
    // console.log(response);
    // console.log(response[111].busi_end_dt);
