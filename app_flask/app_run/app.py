@@ -16,7 +16,7 @@ app = Flask(__name__)
 # Flask Routes
 @app.route("/")
 def home():
-    return render_template("index_app.html")
+    return render_template("index_dd.html")
 
 
 @app.route("/original_data")
@@ -31,9 +31,6 @@ def original_sf():
     return jsonify((original_results).to_dict("record"))
 
 
-
-
-
 @app.route("/get_data")
 def data_sf():
     print('Working')
@@ -41,10 +38,23 @@ def data_sf():
     engine = create_engine('postgresql://postgres:'+ pswd + '@localhost:5432/sfbusiness_db')
     connection = engine.connect()
 
-    results = pd.read_sql('SELECT * FROM sf_business', connection)
+    results = pd.read_sql('SELECT * FROM sf_business limit 10', connection)
+
+    return jsonify((results).to_dict("record"))
+
+
+
+@app.route("/busi_bar")
+def busi_bar_t():
+    print('Working')
+    #Establish connection with the database
+    engine = create_engine('postgresql://postgres:'+ pswd + '@localhost:5432/sfbusiness_db')
+    connection = engine.connect()
+
+    results1 = pd.read_sql('SELECT * FROM sf_business', connection)
 
     # Group by business type and value count by business start date
-    business_group = results.groupby(['busi_type'])['busi_start_dt'].apply(pd.Series.value_counts)
+    business_group = results1.groupby(['busi_type'])['busi_start_dt'].apply(pd.Series.value_counts)
     business_frame = business_group.to_frame().reset_index().rename(columns={"level_1":"busi_start_dt","busi_start_dt":"busi_count"})
 
     #Split year from business start date
@@ -64,6 +74,39 @@ def data_sf():
     # Filter values for years > 2009
     busitype_final = busitype_final[ busitype_final['busi_start_year'] >'2009' ]
 
+    return jsonify((busitype_final).to_dict("record"))
+
+    
+@app.route("/neigh_bar")
+def neigh_bar_t():
+    print('Working')
+    #Establish connection with the database
+    engine = create_engine('postgresql://postgres:'+ pswd + '@localhost:5432/sfbusiness_db')
+    connection = engine.connect()
+
+    results2 = pd.read_sql('SELECT * FROM sf_business', connection)
+
+    # Groupby neighborhood
+    neighborhood_group = results2.groupby(['neighborhood'])['busi_start_dt'].apply(pd.Series.value_counts)
+    neighborhood_frame=neighborhood_group.to_frame().reset_index().rename(columns={"level_1":"busi_start_dt","busi_start_dt":"busi_count"})
+
+    #Split year from date
+    fix_n = list(neighborhood_frame["busi_start_dt"])
+    fix_n2 = [x.split("/") for x in fix_n]
+    busi_start_year_neighborhood = [x[2] for x in fix_n2]
+    newcol_n = pd.DataFrame(busi_start_year_neighborhood)
+
+    # Concat split year df
+    year_n_df = pd.concat([neighborhood_frame, newcol_n], axis=1)
+    year_n_df = year_n_df.rename(columns={0:"busi_start_year"})
+
+    # Group by neighborhood
+    neighborhood_final1 = year_n_df.groupby(['busi_start_year'])['neighborhood'].apply(pd.Series.value_counts)
+    neighborhood_final = neighborhood_final1.to_frame().reset_index().rename(columns={"level_1":"neighborhood","neighborhood":"busi_count"})
+    neighborhood_final = neighborhood_final[ neighborhood_final['busi_start_year'] >'2009' ]
+
+
+
     # #Convert columns to array
     # busistart_year_arr = busitype_final['busi_start_year'].to_list()
     # busiype_arr = busitype_final['busi_type'].to_list()
@@ -76,7 +119,7 @@ def data_sf():
     # json_data = json.dumps(busitype_dict)
     # return(json_data)
 
-    return jsonify((busitype_final).to_dict("record"))
+    return jsonify((neighborhood_final).to_dict("record"))
     
     # return jsonify((results).to_dict("record"))
 

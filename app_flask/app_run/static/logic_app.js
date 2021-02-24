@@ -1,78 +1,75 @@
 // Store our API endpoint inside queryUrl
-var parseTime = d3.timeParse("%Y-%m-%d");
-
-d3.json("/original_data").then(response => {
+// d3.json("/get_data").then(response => {
    
-  console.log(response);
+//   // console.log(response);
+// });
 
-//   // var chooseYear = response.filter(x=>x.busistart_year === '2010');
-//   var count = response.busi_count;
-//   console.log(count)
-//   var busitype = response.busi_type;
-//   console.log(busitype)
+d3.json("/busi_bar").then(response => {
+   
+    // console.log(response);
 
+  businesstype = [];
+  businesscount= [];
+  extra = []
 
-//   console.log(response);
-//   console.log(response[1].busi_start_year);
-//  console.log(response[1].busi_type);
-//  console.log(response[1].busi_count);
+ for (var i=0; len = response.length, i<len; i++){
+   if (response[i].busi_start_year === '2010'){
+     businesstype.push(response[i].busi_type);
+     businesscount.push(response[i].busi_count);}
+    else {extra.push(response[i].busi_count);}
 
-//   businesstype = [];
-//   businesscount= [];
-//   extra = []
-
-//  for (var i=0; len = response.length, i<len; i++){
-//    if (response[i].busi_start_year === '2010'){
-//      console.log('greater')
-//      businesstype.push(response[i].busi_type);
-//      businesscount.push(response[i].busi_count);}
-//     else {extra.push(response[i].busi_count);}
-
-//     console.log(businesstype);
-//     console.log(businesscount);
-
-    
+    // console.log(businesstype);
+    // console.log(businesscount);
   
+  var trace1 = {
+   x: businesstype,
+   y: businesscount,
+   type: "bar"
+ };
+ 
+ var data = [trace1];
+ 
+ var layout = {
+   title: "Business Type Chart"
+ };
+ 
+ Plotly.newPlot("bar", data, layout);
+
+  }
+});
+//******************************************************* */
+
+d3.json("/neigh_bar").then(response => {
+   
+    // console.log(response);
+
+  neighBor = [];
+  countNeigh= [];
+  extra1 = []
+
+ for (var i=0; len = response.length, i<len; i++){
+   if (response[i].busi_start_year === '2010'){
+     neighBor.push(response[i].neighborhood);
+     countNeigh.push(response[i].busi_count);}
+    else {extra1.push(response[i].busi_count);}
+
+    // console.log(neighBor);
+    // console.log(countNeigh);
   
-
-
-//   var trace1 = {
-//    x: businesstype,
-//    y: businesscount,
-//    type: "bar"
-//  };
+  var trace2 = {
+   x: neighBor,
+   y: countNeigh,
+   type: "bar"
+ };
  
-//  var data = [trace1];
+ var data1 = [trace2];
  
-//  var layout = {
-//    title: "'Bar' Chart"
-//  };
+ var layout1 = {
+   title: "Neighborhood Chart"
+ };
  
-//  Plotly.newPlot("map", data, layout);
-
-   
-//   }
-// Create an array of music provider labels
-// var labels = Object.keys(data.us);
-
-   // console.log(response);
-   // console.log(response[111].busi_end_dt);
-   // console.log(response[101].latitude)
-//    console.log(response);
-//    console.log("business_name", response[1].business_name)
-//    console.log("busi_start_dt", response[1].busi_start_dt)
-//    console.log("busi_end_dt", response[1].busi_end_dt)
-   
-//    if (response[1].busi_end_dt===""){
-//      console.log("busi_end_dt IS EMPTY")
-//      newDate="UNKNOWN"
-//      var year = "UNKNOWN"
-//    }else{
-//      newDate=parseTime(response[1].busi_end_dt)
-//      var year =  new Date(response[1].busi_end_dt).getFullYear()
-//    }
-//    console.log(newDate)
-//    console.log(year)
+ Plotly.newPlot("bubble", data1, layout1);
+  }
 
 // var myMap = L.map("map", {
 //     center: [37.7749, -122.4194],
@@ -98,3 +95,4 @@ d3.json("/original_data").then(response => {
 //       }
 
 });
+

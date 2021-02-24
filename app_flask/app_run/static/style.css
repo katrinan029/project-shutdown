@@ -3,7 +3,7 @@ body {
   margin: 0;
 }
 
-#map,
+map,
 body,
 html {
   height: 100%;
@@ -12,3 +12,4 @@ html {
 h1 {
   text-align: center;
 }
+
