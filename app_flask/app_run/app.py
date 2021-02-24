@@ -16,9 +16,10 @@ app = Flask(__name__)
 # Flask Routes
 @app.route("/")
 def home():
-    return render_template("index_dd.html")
+    return render_template("combined_t.html")
 
-
+# ***************************************************************
+# ***************************************************************
 @app.route("/original_data")
 def original_sf():
 
@@ -30,6 +31,8 @@ def original_sf():
 
     return jsonify((original_results).to_dict("record"))
 
+# *****************************************************************************************
+# *****************************************************************************************
 
 @app.route("/get_data")
 def data_sf():
@@ -42,8 +45,8 @@ def data_sf():
 
     return jsonify((results).to_dict("record"))
 
-
-
+# *********************************************************************************************
+# *****************************************************************************************
 @app.route("/busi_bar")
 def busi_bar_t():
     print('Working')
@@ -76,7 +79,8 @@ def busi_bar_t():
 
     return jsonify((busitype_final).to_dict("record"))
 
-    
+# ************************************************************************************************************
+# *****************************************************************************************
 @app.route("/neigh_bar")
 def neigh_bar_t():
     print('Working')
@@ -105,8 +109,27 @@ def neigh_bar_t():
     neighborhood_final = neighborhood_final1.to_frame().reset_index().rename(columns={"level_1":"neighborhood","neighborhood":"busi_count"})
     neighborhood_final = neighborhood_final[ neighborhood_final['busi_start_year'] >'2009' ]
 
+    return jsonify((neighborhood_final).to_dict("record"))
 
+# *****************************************************************************************************
+# *****************************************************************************************
+@app.route("/combined_data")
+def combined_neigh_bt():
+    #Establish connection with the database
+    engine = create_engine('postgresql://postgres:'+ pswd + '@localhost:5432/sfbusiness_db')
+    connection = engine.connect()
 
+    results3 = pd.read_sql('SELECT * FROM sf_business', connection)
+    combined_n_bt = results3.groupby(['neighborhood'])['busi_type'].apply(pd.Series.value_counts)
+
+    combined_n_bt=combined_n_bt.to_frame().reset_index().rename(columns={" ":"business_type"," ":"busi_count"})
+    combined_n_bt = combined_n_bt.rename(columns={"level_1":"busi_type","busi_type":"busi_count"})
+   
+    return jsonify((combined_n_bt).to_dict("record"))   
+   
+   
+# *****************************************************************************************
+# ************************************************************************************************************
     # #Convert columns to array
     # busistart_year_arr = busitype_final['busi_start_year'].to_list()
     # busiype_arr = busitype_final['busi_type'].to_list()
@@ -119,7 +142,6 @@ def neigh_bar_t():
     # json_data = json.dumps(busitype_dict)
     # return(json_data)
 
-    return jsonify((neighborhood_final).to_dict("record"))
     
     # return jsonify((results).to_dict("record"))
 
