@@ -321,3 +321,18 @@ canvas#myChart {
 .featurette-heading-2 {
   text-align: right;
 }
+
+.col-md-11 {
+  background: black
+}
+
+.col-md-1 {
+  background: black;
+  padding-top: 20px;
+}
+
+
+h5 {
+  font-family: 'Poppins', serif;
+  color: white;
+}

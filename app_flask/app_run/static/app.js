@@ -273,6 +273,7 @@ function optionChanged(year) {
           size: 14,
           color: 'white',
         },
+        automargin: true,
       },
       yaxis: {
         title: 'Number of Businesses',

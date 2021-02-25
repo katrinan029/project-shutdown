@@ -75,6 +75,26 @@
         <hr class="featurette-divider">
 
         <div class="row featurette">
+          <div class="col-md-12">
+            <h2 class="featurette-heading">Business Closure by Type (NAICS)<span class="text-muted"></span></h2>
+            <p class="lead"> The data provided below provides business closures by business type for the last ten years via the selection menu. </p>
+            <div class="row">
+              <div class="col-md-1">
+                <div class="well">
+                  <h5>Select a year:</h5>
+                  <select id="selDataset" onchange="optionChanged(this.value)"></select>
+                </div>
+              </div>
+              <div class="col-md-11">
+                <div id="bar2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
           <div class="col-md-7">
             <h2 class="featurette-heading">Interactive Map<span class="text-muted"></span></h2>
             <p class="lead"></p>
@@ -99,8 +119,8 @@
 
         <div class="row featurette">
           <div class="col-md-12">
-            <h2 class="featurette-heading">Business Closure by Neighborhood<span class="text-muted"></span></h2>
-            <p class="lead"></p>
+            <h2 class="featurette-heading">Business Closure by Type (NAICS)<span class="text-muted"></span></h2>
+            <p class="lead"> The data provided below provides business closures by business type for the last ten years via the selection menu. </p>
             <div class="row">
               <div class="col-md-1">
                 <div class="well">
@@ -109,7 +129,7 @@
                 </div>
               </div>
               <div class="col-md-11">
-                <div id="bar2"></div>
+                <div id="bar0"></div>
               </div>
             </div>
           </div>
