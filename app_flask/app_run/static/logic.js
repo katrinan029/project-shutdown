@@ -5,7 +5,7 @@ var lightmap = L.tileLayer(
   {
     attribution:
       'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 10,
+    maxZoom: 18,
     id: 'light-v10',
     accessToken: API_KEY,
   },
@@ -16,6 +16,7 @@ var layers = {
   Business_Moved_Location: new L.LayerGroup(),
 };
 
+console.log(layers);
 // Map with layers
 var myMap = L.map('map-id', {
   center: [37.7749, -122.4194],

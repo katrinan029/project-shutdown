@@ -42,6 +42,11 @@ def data():
     return render_template('data.html')
 
 
+@app.route('/map')
+def map():
+    return render_template('map.html')
+
+
 # ***************************************************************
 # ***************************************************************
 @app.route("/original_data")

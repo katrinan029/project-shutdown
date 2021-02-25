@@ -34,10 +34,13 @@
             <a class="nav-link" href="data" style="color: lightgray">Data</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="map" style="color: lightgray">Map</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="contacts" style="color: lightgray">Contacts</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('data_sf') }}" style="color: lightgray">Geo Json</a>
+            <a class="nav-link" href="{{ url_for('data_sf') }}" style="color: lightgray">API</a>
           </li>
         </ul>
       </div>
@@ -96,18 +99,6 @@
         <hr class="featurette-divider">
 
         <div class="row featurette">
-          <div class="col-md-7">
-            <h2 class="featurette-heading">Interactive Map<span class="text-muted"></span></h2>
-            <p class="lead"></p>
-          </div>
-          <div class="col-md-5">
-
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
           <div class="col-md-12">
             <h2 class="featurette-heading">Business Closure by Neighborhood<span class="text-muted"></span></h2>
             <p class="lead"> The data provided below provides business closures by neighborhoods in San Francisco for the last ten years via the selection menu. </p>
@@ -144,8 +135,6 @@
     <script src="{{ url_for('static', filename='neighbor_t.js') }}"></script>
     <script src="{{ url_for('static', filename='combined_t.js') }}"></script> -->
 
-
-  
     {% endblock %}
   </body>
 </html>
