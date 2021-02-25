@@ -316,7 +316,9 @@ var neighborValue = d3.json('/neigh_bar').then((response) => {
 });
 
 function optionChanged(year2) {
-  console.log(typeof year2);
+  const loader2 = document.querySelector('.loader2');
+  loader2.style.visibility = 'visible';
+
   d3.json('/neigh_bar').then((response) => {
     console.log(response);
 
@@ -368,5 +370,7 @@ function optionChanged(year2) {
     };
 
     Plotly.newPlot('bar3', data3, layout3);
+
+    loader2.style.visibility = 'hidden';
   });
 }
