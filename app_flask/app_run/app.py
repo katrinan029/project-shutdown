@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import json
 import datetime
-from ps_wd import pswd
+# from ps_wd import pswd
 
 import sqlalchemy
 from sqlalchemy import create_engine, func
@@ -10,6 +10,7 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify
 from flask import Flask, render_template
 
+pswd = 'postgres'
 
 # Flask Setup
 app = Flask(__name__)
@@ -64,7 +65,7 @@ def data_sf():
                            pswd + '@localhost:5432/sfbusiness_db')
     connection = engine.connect()
 
-    results = pd.read_sql('SELECT * FROM sf_business limit 10', connection)
+    results = pd.read_sql('SELECT * FROM sf_business limit 100', connection)
 
     return jsonify((results).to_dict("record"))
 

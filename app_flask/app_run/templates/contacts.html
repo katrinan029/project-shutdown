@@ -24,16 +24,19 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 nav justify-content-end flex-1">
           <li class="nav-item current-selection">
-            <a class="nav-link" href="index" style="color: lightgray">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/" style="color: lightgray">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="charts" style="color: lightgray">Graphs</a>
+            <a class="nav-link active" href="charts" style="color: white">Graphs</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="data" style="color: lightgray">Data</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="contacts" style="color: white">Contacts</a>
+            <a class="nav-link" href="contacts" style="color: lightgray">Contacts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('data_sf') }}" style="color: lightgray">Geo Json</a>
           </li>
         </ul>
       </div>

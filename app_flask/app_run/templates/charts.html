@@ -25,7 +25,7 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 nav justify-content-end flex-1">
           <li class="nav-item current-selection">
-            <a class="nav-link" href="index" style="color: lightgray">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/" style="color: lightgray">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="charts" style="color: lightgray">Graphs</a>
@@ -35,6 +35,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="contacts" style="color: white">Contacts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('data_sf') }}" style="color: lightgray">Geo Json</a>
           </li>
         </ul>
       </div>
@@ -89,9 +92,30 @@
             <p class="lead"></p>
           </div>
           <div class="col-md-5">
-
           </div>
         </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h2 class="featurette-heading">Business Closure by Neighborhood<span class="text-muted"></span></h2>
+            <p class="lead"></p>
+            <div class="row">
+              <div class="col-md-1">
+                <div class="well">
+                  <h5>Select a year:</h5>
+                  <select id="selDataset" onchange="optionChanged(this.value)"></select>
+                </div>
+              </div>
+              <div class="col-md-11">
+                <div id="bar2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
 
 
 
@@ -104,11 +128,11 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='config.js') }}"></script>
-  
-    <script src="{{ url_for('static', filename='busitype_t.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='config.js') }}"></script>
+   -->
+    <!-- <script src="{{ url_for('static', filename='busitype_t.js') }}"></script>
     <script src="{{ url_for('static', filename='neighbor_t.js') }}"></script>
-    <script src="{{ url_for('static', filename='combined_t.js') }}"></script>
+    <script src="{{ url_for('static', filename='combined_t.js') }}"></script> -->
 
 
   
