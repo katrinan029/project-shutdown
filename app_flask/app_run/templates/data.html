@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="static/cover.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">  
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <title>Contacts</title>
+  </head>
+  <body class="black contacts-body">
+    {% extends "index.html" %}
+    {% block content %}
+    <nav class="navbar nav-masthead navbar-expand-lg navbar-light nav-bar-color justify-content-end">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 nav justify-content-end flex-1">
+          <li class="nav-item current-selection">
+            <a class="nav-link" href="index.html" style="color: lightgray">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="charts.html" style="color: lightgray">Graphs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="data.html" style="color: white">Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contacts.html" style="color: lightgray">Contacts</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="data-download">
+      <h1 class="data-download">Data</h1>
+      <p class="data-download">
+        The data used to generate the charts and graphs in this project was sourced from the City and County of San Francisco via the DataSF portal and was updated as of February 16, 2021. 
+        The data collected from the DataSF portal was cleaned for analysis by removing irrelevant and improperly formatted information. The sample data in the table below is the result of the data cleaning process. For a comprehensive file of all data points, click on the download button below.     
+      </p>
+      <div class="data-download">
+        <button class="btn-download"><i class="fa fa-download"></i> Download</button>
+      </div>
+      <hr>
+    </div>
+    <script>
+      function getData(data) {
+        let allRows = data.split("\n");
+        var table = '<table class="conatiner-table table table-dark table-striped table-hover">';
+          for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
+            if(singleRow === 0) {
+              table += "<thead>";
+              table += "<tr>";
+            } else {
+              table += "<tr>";
+            }
+            var rowCells = allRows[singleRow].split(',');
+            for (var rowSingleCell = 0; rowSingleCell < rowCells.length; rowSingleCell++) {
+              if(singleRow === 0) {
+                table += "<th>";
+                table += rowCells[rowSingleCell];
+              } else {
+                table += "<td>";
+                table += rowCells[rowSingleCell];
+                table += "</td>"; 
+              }
+            }
+            if(singleRow === 0) {
+              table += "</tr>";
+              table += "</thead>";
+              table += "<tbody>";
+            } else {
+              table += "</tr>";
+            }
+          }
+          table += "</tbody>";
+          table += "</table>";
+          $("body").append(table);
+      }
+      $.ajax({
+        url:"data.csv",
+        dataType: "text",
+      }).done(getData)
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {% endblock %}
+  </body>
+</html>

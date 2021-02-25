@@ -17,15 +17,18 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return render_template("index.html")
-
     
 @app.route('/charts')
-def about():
+def charts():
   return render_template('charts.html')
 
 @app.route('/contacts')
-def about():
+def contacts():
   return render_template('contacts.html')
+
+@app.route('/data')
+def data():
+  return render_template('data.html')
 
 
 
@@ -88,6 +91,8 @@ def busi_bar_t():
     # Filter values for years > 2009
     busitype_final = busitype_final[ busitype_final['busi_start_year'] >'2009' ]
 
+    # return jsonify((busitype_final).to_dict("record"))
+
     return jsonify((busitype_final).to_dict("record"))
 
 # ************************************************************************************************************
@@ -120,7 +125,9 @@ def neigh_bar_t():
     neighborhood_final = neighborhood_final1.to_frame().reset_index().rename(columns={"level_1":"neighborhood","neighborhood":"busi_count"})
     neighborhood_final = neighborhood_final[ neighborhood_final['busi_start_year'] >'2009' ]
 
-    return jsonify((neighborhood_final).to_dict("record"))
+    # return jsonify((neighborhood_final).to_dict("record"))
+
+    return jsonify((neighborhood_final).to_dict("record")) 
 
 # *****************************************************************************************************
 # *****************************************************************************************
@@ -136,7 +143,7 @@ def combined_neigh_bt():
     combined_n_bt=combined_n_bt.to_frame().reset_index().rename(columns={" ":"business_type"," ":"busi_count"})
     combined_n_bt = combined_n_bt.rename(columns={"level_1":"busi_type","busi_type":"busi_count"})
    
-    return jsonify((combined_n_bt).to_dict("record"))   
+    return jsonify((combined_n_bt).to_dict("record"))
    
    
 # *****************************************************************************************

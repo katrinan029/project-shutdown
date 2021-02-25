@@ -22,6 +22,8 @@
 </head>
 
 <body>
+  {% extends "index.html" %}
+    {% block content %}
   <!-- The div where we will inject our map -->
   <div id="map"></div>
   <!-- <div id="plot"></div> -->
@@ -39,6 +41,6 @@
   <!-- <script type="text/javascript" src="../static/logic.js"></script> -->
 
   <script src="{{ url_for('static', filename='logic_app.js') }}"></script>
-
+  {% endblock %}
 </body>
 </html>
