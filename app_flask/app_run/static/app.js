@@ -228,10 +228,10 @@ var value = d3.json('/busi_bar').then((response) => {
     .property('value', (d) => d)
 
     .text((d) => d);
-  optionChanged(years);
+  optionChangedNAICS(years);
 });
 
-function optionChanged(year) {
+function optionChangedNAICS(year) {
   d3.json('/busi_bar').then((response) => {
     businesstype = [];
     businesscount = [];
@@ -285,10 +285,10 @@ function optionChanged(year) {
 }
 
 //******************************************************* */
-var value = d3.json('/neigh_bar').then((response) => {
+var neighborValue = d3.json('/neigh_bar').then((response) => {
   console.log(response);
 
-  years = [
+  years2 = [
     '2010',
     '2011',
     '2012',
@@ -305,16 +305,16 @@ var value = d3.json('/neigh_bar').then((response) => {
 
   var dropdownMenu = d3.select('#selDataset2').selectAll('option');
   dropdownMenu
-    .data(years)
+    .data(years2)
     .enter()
     .append('option')
-    .property('value', (d) => d)
+    .property('neighborValue', (d) => d)
 
     .text((d) => d);
-  optionChanged(years);
+  optionChanged(years2);
 });
 
-function optionChanged(year) {
+function optionChanged(year2) {
   d3.json('/neigh_bar').then((response) => {
     // console.log(response);
 
@@ -322,8 +322,8 @@ function optionChanged(year) {
     countNeigh = [];
     extra1 = [];
 
-    for (var i = 0; (len = response.length), i < len; i++) {
-      if (response[i].busi_start_year === year) {
+    for (var i = 0; i < response.length; i++) {
+      if (response[i].busi_start_year === year2) {
         neighBor.push(response[i].neighborhood);
         countNeigh.push(response[i].busi_count);
       } else {

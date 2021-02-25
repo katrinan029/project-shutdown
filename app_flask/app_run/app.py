@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import json
 import datetime
-# from ps_wd import pswd
+from ps_wd import pswd
 
 import sqlalchemy
 from sqlalchemy import create_engine, func
@@ -10,7 +10,7 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify
 from flask import Flask, render_template
 
-pswd = 'postgres'
+# pswd = 'postgres'
 
 # Flask Setup
 app = Flask(__name__)
