@@ -32,7 +32,7 @@ var value = d3.json("/combined_data").then(jsonData => {
 
 d3.json("/combined_data").then(response => {
    
-    console.log(response);
+    console.log('combined_t data');
 
   businesstype = [];
   businesscount= [];

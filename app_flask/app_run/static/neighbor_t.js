@@ -75,7 +75,7 @@ function optionChanged(year){
 
 d3.json("/neigh_bar").then(response => {
    
-    // console.log(response);
+    console.log('neighbor data');
 
   var neighBor = [];
   var countNeigh= [];

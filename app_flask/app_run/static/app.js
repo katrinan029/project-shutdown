@@ -1,6 +1,7 @@
-d3.csv('/original_data').then((importedData) => {
+d3.json('/original_data').then((importedData) => {
   const csvData = importedData;
 
+    console.log('app js data')
   let yearCount = {};
   yearCount['Business End Date'] = {};
   yearCount['Business Start Date'] = {};
@@ -119,7 +120,7 @@ d3.csv('/original_data').then((importedData) => {
   businessTypes['Not Categorized'] = businessTypes[''];
   delete businessTypes[''];
 
-  console.log(Object.keys(businessTypes));
+  // console.log(Object.keys(businessTypes));
 
   const totalBusinessesCount = Object.values(businessTypes).reduce(
     (prev, curr) => (prev += curr),
