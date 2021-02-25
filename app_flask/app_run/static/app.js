@@ -203,8 +203,6 @@ d3.csv('../static/sfdata.csv').then((importedData) => {
 });
 
 var value = d3.json('/busi_bar').then((response) => {
-  console.log(response);
-
   var years = [
     '2010',
     '2011',
@@ -228,10 +226,13 @@ var value = d3.json('/busi_bar').then((response) => {
     .property('value', (d) => d)
 
     .text((d) => d);
-  optionChangedNAICS(years);
+  optionChangedNAICS('2010');
 });
 
 function optionChangedNAICS(year) {
+  const loader = document.querySelector('.loader');
+  loader.style.visibility = 'visible';
+
   d3.json('/busi_bar').then((response) => {
     businesstype = [];
     businesscount = [];
@@ -246,13 +247,13 @@ function optionChangedNAICS(year) {
       }
     }
 
-    var trace1 = {
+    var trace4 = {
       x: businesstype,
       y: businesscount,
       type: 'bar',
     };
 
-    var data = [trace1];
+    var data = [trace4];
 
     const layout = {
       plot_bgcolor: 'black',
@@ -281,13 +282,13 @@ function optionChangedNAICS(year) {
     };
 
     Plotly.newPlot('bar2', data, layout);
+
+    loader.style.visibility = 'hidden';
   });
 }
 
 //******************************************************* */
 var neighborValue = d3.json('/neigh_bar').then((response) => {
-  console.log(response);
-
   years2 = [
     '2010',
     '2011',
@@ -309,14 +310,15 @@ var neighborValue = d3.json('/neigh_bar').then((response) => {
     .enter()
     .append('option')
     .property('neighborValue', (d) => d)
-
     .text((d) => d);
-  optionChanged(years2);
+
+  optionChanged('2010');
 });
 
 function optionChanged(year2) {
+  console.log(typeof year2);
   d3.json('/neigh_bar').then((response) => {
-    // console.log(response);
+    console.log(response);
 
     neighBor = [];
     countNeigh = [];
@@ -329,42 +331,42 @@ function optionChanged(year2) {
       } else {
         extra1.push(response[i].busi_count);
       }
-
-      var trace3 = {
-        x: neighBor,
-        y: countNeigh,
-        type: 'bar',
-      };
-
-      var data3 = [trace3];
-
-      const layout3 = {
-        plot_bgcolor: 'black',
-        paper_bgcolor: 'black',
-        xaxis: {
-          tickfont: {
-            family: 'Poppins, serif',
-            size: 14,
-            color: 'white',
-          },
-          automargin: true,
-        },
-        yaxis: {
-          title: 'Number of Businesses',
-          titlefont: {
-            family: 'Poppins, serif',
-            size: 14,
-            color: 'white',
-          },
-          tickfont: {
-            family: 'Poppins, serif',
-            size: 14,
-            color: 'white',
-          },
-        },
-      };
-
-      Plotly.newPlot('bar3', data3, layout3);
     }
+
+    var trace3 = {
+      x: neighBor,
+      y: countNeigh,
+      type: 'bar',
+    };
+
+    var data3 = [trace3];
+
+    const layout3 = {
+      plot_bgcolor: 'black',
+      paper_bgcolor: 'black',
+      xaxis: {
+        tickfont: {
+          family: 'Poppins, serif',
+          size: 14,
+          color: 'white',
+        },
+        automargin: true,
+      },
+      yaxis: {
+        title: 'Number of Businesses',
+        titlefont: {
+          family: 'Poppins, serif',
+          size: 14,
+          color: 'white',
+        },
+        tickfont: {
+          family: 'Poppins, serif',
+          size: 14,
+          color: 'white',
+        },
+      },
+    };
+
+    Plotly.newPlot('bar3', data3, layout3);
   });
 }

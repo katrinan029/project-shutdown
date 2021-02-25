@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import json
 import datetime
-from ps_wd import pswd
+# from ps_wd import pswd
 
 import sqlalchemy
 from sqlalchemy import create_engine, func
@@ -10,7 +10,11 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify
 from flask import Flask, render_template
 
-# pswd = 'postgres'
+pswd = 'postgres'
+
+engine = create_engine('postgresql://postgres:' +
+                       pswd + '@localhost:5432/sfbusiness_db')
+connection = engine.connect()
 
 # Flask Setup
 app = Flask(__name__)
@@ -75,11 +79,10 @@ def data_sf():
 
 @app.route("/busi_bar")
 def busi_bar_t():
-    print('Working')
     # Establish connection with the database
-    engine = create_engine('postgresql://postgres:' +
-                           pswd + '@localhost:5432/sfbusiness_db')
-    connection = engine.connect()
+    # engine = create_engine('postgresql://postgres:' +
+    #                        pswd + '@localhost:5432/sfbusiness_db')
+    # connection = engine.connect()
 
     results1 = pd.read_sql('SELECT * FROM sf_business', connection)
 
@@ -118,11 +121,10 @@ def busi_bar_t():
 
 @app.route("/neigh_bar")
 def neigh_bar_t():
-    print('Working')
     # Establish connection with the database
-    engine = create_engine('postgresql://postgres:' +
-                           pswd + '@localhost:5432/sfbusiness_db')
-    connection = engine.connect()
+    # engine = create_engine('postgresql://postgres:' +
+    #                        pswd + '@localhost:5432/sfbusiness_db')
+    # connection = engine.connect()
 
     results2 = pd.read_sql('SELECT * FROM sf_business', connection)
 
