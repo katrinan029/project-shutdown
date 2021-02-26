@@ -313,7 +313,7 @@ var neighborValue = d3.json('/neigh_bar').then((response) => {
 
 function optionChanged(year2) {
 <<<<<<< HEAD
-  // console.log(typeof year2);
+  console.log(typeof year2);
 =======
   const loader2 = document.querySelector('.loader2');
   loader2.style.visibility = 'visible';
