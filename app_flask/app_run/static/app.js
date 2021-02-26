@@ -316,9 +316,9 @@ var neighborValue = d3.json('/neigh_bar').then((response) => {
 });
 
 function optionChanged(year2) {
-  console.log(typeof year2);
+  // console.log(typeof year2);
   d3.json('/neigh_bar').then((response) => {
-    console.log(response);
+    // console.log(response);
 
     neighBor = [];
     countNeigh = [];
