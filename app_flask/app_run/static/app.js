@@ -205,17 +205,11 @@ d3.csv('../static/sfdata.csv').then((importedData) => {
 var value = d3.json('/busi_bar').then((response) => {
   var years = [
     '2010',
-    '2011',
     '2012',
-    '2013',
     '2014',
-    '2015',
     '2016',
-    '2017',
     '2018',
-    '2019',
     '2020',
-    '2021',
   ];
 
   var dropdownMenu = d3.select('#selDataset').selectAll('option');
@@ -229,7 +223,7 @@ var value = d3.json('/busi_bar').then((response) => {
   optionChangedNAICS('2010');
 });
 
-function optionChangedNAICS(year) {
+function optionChangedNAICS(yearSelected) {
   const loader = document.querySelector('.loader');
   loader.style.visibility = 'visible';
 
@@ -239,11 +233,11 @@ function optionChangedNAICS(year) {
     extra = [];
 
     for (var i = 0; i < response.length; i++) {
-      if (response[i].busi_start_year === year) {
+      if (response[i].locBusi_end_year === yearSelected) {
         businesstype.push(response[i].busi_type);
-        businesscount.push(response[i].busi_count);
+        businesscount.push(response[i].locbusi_end_count);
       } else {
-        extra.push(response[i].busi_count);
+        extra.push(response[i].locbusi_end_count);
       }
     }
 
@@ -251,6 +245,8 @@ function optionChangedNAICS(year) {
       x: businesstype,
       y: businesscount,
       type: 'bar',
+      marker:{color:'#d62728'}
+
     };
 
     var data = [trace4];

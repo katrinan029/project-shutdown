@@ -91,34 +91,28 @@ def busi_bar_t():
 
     results1 = pd.read_sql('SELECT * FROM sf_business', connection)
 
-    # Group by business type and value count by business start date
-    business_group = results1.groupby(
-        ['busi_type'])['loc_start_dt'].apply(pd.Series.value_counts)
-    business_frame = business_group.to_frame().reset_index().rename(
-        columns={"level_1": "loc_start_dt", "loc_start_dt": "busi_count"})
+    # Business type by location end date
+    business_end = results1.groupby(['busi_type'])['loc_end_dt'].apply(pd.Series.value_counts)
+    loc_end_frame=business_end.to_frame().reset_index().rename(columns={"level_1":"location_end_date","loc_end_dt":"loc_end_count"})
 
-    # Split year from business start date
-    fix = list(business_frame["loc_start_dt"])
-    fix2 = [x.split("/") for x in fix]
-    busi_start_year_list = [x[2] for x in fix2]
-    newcol = pd.DataFrame(busi_start_year_list)
+    #Split year from date
+    fix01 = list(loc_end_frame["location_end_date"])
+    fix02 = [x.split("/") for x in fix01]
+    loc_end_busi = [x[2] for x in fix02]
+    loc_end_busitype = pd.DataFrame(loc_end_busi)
 
-    # Concat split year with business type df
-    year_df = pd.concat([business_frame, newcol], axis=1)
-    year_df = year_df.rename(columns={0: "busi_start_year"})
+    year_loc_busitype = pd.concat([loc_end_frame, loc_end_busitype], axis=1)
+    year_loc_busitype = year_loc_busitype.rename(columns={0:"locBusi_end_year"})
 
-    # Group by year and value count by business type
-    business_final = year_df.groupby(['busi_start_year'])[
-        'busi_type'].apply(pd.Series.value_counts)
-    busitype_final = business_final.to_frame().reset_index().rename(
-        columns={"level_1": "busi_type", "busi_type": "busi_count"})
+    locBusi_end_final_1 = year_loc_busitype.groupby(['locBusi_end_year'])['busi_type'].apply(pd.Series.value_counts)
+    locBusi_end_final = locBusi_end_final_1.to_frame().reset_index().rename(columns={"level_1":"busi_type","busi_type":"locbusi_end_count"})
+    locBusi_end_final = locBusi_end_final[ locBusi_end_final['locBusi_end_year'] >'2009' ]
 
-    # Filter values for years > 2009
-    busitype_final = busitype_final[busitype_final['busi_start_year'] > '2009']
+    # # Merge location start and end dates
+    # combined_loc_start_end = pd.merge(busitype_final, locBusi_end_final, on='busi_type')
 
-    # return jsonify((busitype_final).to_dict("record"))
 
-    return jsonify((busitype_final).to_dict("record"))
+    return jsonify((locBusi_end_final).to_dict("record"))
 
 # ************************************************************************************************************
 # *****************************************************************************************
