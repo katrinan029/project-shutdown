@@ -312,13 +312,13 @@ var neighborValue = d3.json('/neigh_bar').then((response) => {
 });
 
 function optionChanged(year2) {
-<<<<<<< HEAD
+
   console.log(typeof year2);
-=======
+
   const loader2 = document.querySelector('.loader2');
   loader2.style.visibility = 'visible';
 
->>>>>>> 4291505174ec32678b74607f5e41b0c0b2bb790b
+
   d3.json('/neigh_bar').then((response) => {
     // console.log(response);
 
