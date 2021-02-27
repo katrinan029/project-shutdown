@@ -92,25 +92,29 @@ def busi_bar_t():
     results1 = pd.read_sql('SELECT * FROM sf_business', connection)
 
     # Business type by location end date
-    business_end = results1.groupby(['busi_type'])['loc_end_dt'].apply(pd.Series.value_counts)
-    loc_end_frame=business_end.to_frame().reset_index().rename(columns={"level_1":"location_end_date","loc_end_dt":"loc_end_count"})
+    business_end = results1.groupby(['busi_type'])[
+        'loc_end_dt'].apply(pd.Series.value_counts)
+    loc_end_frame = business_end.to_frame().reset_index().rename(
+        columns={"level_1": "location_end_date", "loc_end_dt": "loc_end_count"})
 
-    #Split year from date
+    # Split year from date
     fix01 = list(loc_end_frame["location_end_date"])
     fix02 = [x.split("/") for x in fix01]
     loc_end_busi = [x[2] for x in fix02]
     loc_end_busitype = pd.DataFrame(loc_end_busi)
 
     year_loc_busitype = pd.concat([loc_end_frame, loc_end_busitype], axis=1)
-    year_loc_busitype = year_loc_busitype.rename(columns={0:"locBusi_end_year"})
+    year_loc_busitype = year_loc_busitype.rename(
+        columns={0: "locBusi_end_year"})
 
-    locBusi_end_final_1 = year_loc_busitype.groupby(['locBusi_end_year'])['busi_type'].apply(pd.Series.value_counts)
-    locBusi_end_final = locBusi_end_final_1.to_frame().reset_index().rename(columns={"level_1":"busi_type","busi_type":"locbusi_end_count"})
-    locBusi_end_final = locBusi_end_final[ locBusi_end_final['locBusi_end_year'] >'2009' ]
+    locBusi_end_final_1 = year_loc_busitype.groupby(
+        ['locBusi_end_year'])['busi_type'].apply(pd.Series.value_counts)
+    locBusi_end_final = locBusi_end_final_1.to_frame().reset_index().rename(
+        columns={"level_1": "busi_type", "busi_type": "locbusi_end_count"})
+    locBusi_end_final = locBusi_end_final[locBusi_end_final['locBusi_end_year'] > '2009']
 
     # # Merge location start and end dates
     # combined_loc_start_end = pd.merge(busitype_final, locBusi_end_final, on='busi_type')
-
 
     return jsonify((locBusi_end_final).to_dict("record"))
 
@@ -158,6 +162,45 @@ def neigh_bar_t():
 # *****************************************************************************************
 
 
+@app.route("/scatterPlot")
+def scatterPlot():
+
+    engine = create_engine('postgresql://postgres:' +
+                           pswd + '@localhost:5432/sfbusiness_db')
+    connection = engine.connect()
+
+    results1 = pd.read_sql('SELECT * FROM sf_business', connection)
+
+    end_dt_df = results1[results1['loc_end_dt'].notnull()]
+
+    # Location end date
+    fix_end = list(end_dt_df["loc_end_dt"])
+    fix_end2 = [x.split("/") for x in fix_end]
+    loc_end = [x[2] for x in fix_end2]
+    newcol_loc_end = pd.DataFrame(loc_end).rename(columns={0: "Year"})
+
+    location_end_count = newcol_loc_end['Year'].value_counts()
+    location_end_count = pd.DataFrame(location_end_count).reset_index().rename(
+        columns={'index': "year", 'Year': "year_count"})
+    location_end_count = location_end_count[location_end_count['year'] > '2009']
+
+    # Location start date
+    fixloc_start = list(results1["loc_start_dt"])
+    fixloc_start2 = [x.split("/") for x in fixloc_start]
+    loc_start = [x[2] for x in fixloc_start2]
+    newcol_loc_start = pd.DataFrame(loc_start).rename(columns={0: "Year"})
+
+    location_start_count = newcol_loc_start['Year'].value_counts()
+    location_start_count = pd.DataFrame(location_start_count).reset_index().rename(
+        columns={'index': "year", 'Year': "year_count"})
+
+    # Merge location end and start date counts
+    location_data = pd.merge(location_start_count,
+                             location_end_count, on='year')
+    location_data = location_data.rename(
+        columns={'year_count_x': "loc_start_count", 'year_count_y': "loc_end_count"})
+
+    return jsonify((location_data).to_dict("record"))
 
 
 if __name__ == '__main__':

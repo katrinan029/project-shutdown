@@ -51,12 +51,13 @@
 }
 
 .bg-dark {
-  background: rgb(183, 135, 223);
+  background-image: url("../img/sanfrancisco.png");
+  /* background: rgb(183, 135, 223);
   background: linear-gradient(
     0deg,
     rgba(183, 135, 223, 1) 0%,
     rgba(114, 150, 232, 1) 93%
-  );
+  ); */
 }
 
 .nav-link {
@@ -86,6 +87,7 @@
     rgba(183, 135, 223, 1) 0%,
     rgba(114, 150, 232, 1) 93%
   );
+  
 }
 
 .navbar-brand {
@@ -164,7 +166,7 @@
 }
 
 .lead-main {
-  font-size: 15px;
+  font-size: 20px;
   color: #fff;
   font-family: 'Poppins', serif;
 }
@@ -223,7 +225,7 @@
 }
 
 .custom-shape-divider-bottom-1613517362 .shape-fill {
-  fill: #ffffff;
+  fill: rgb(137, 145, 132);
 }
 
 .btn-download {
@@ -371,4 +373,21 @@ h5 {
 
 #myChart {
   padding-bottom: 20px;
+}
+
+#bar4 {
+  font-family: 'Poppins', serif;
+  color: white
+}
+
+rect {
+  font-family: 'Poppins', serif;
+}
+
+text {
+  font-family: 'Poppins', serif;
+}
+
+.card-img-top {
+    height: 370px;
 }
