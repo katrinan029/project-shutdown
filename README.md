@@ -1,9 +1,6 @@
-# project-2
+# Group 5 Project Shutdown Proposal
 
-<<<<<<< HEAD
-Group 5 Project Shutdown Proposal
-
-![](img/PS_Logo_T.png)
+![](img/PS_Logo.png)
 
 Many major cities have been hit hard from COVID, resulting in many issues that no major city was prepared for. In the wake of this mess, it has been reported that a significant amount of businesses have been shut down; most notably San Francisco. In our project, we will be analyzing the potential impact particularly on registered business across San Francisco. 
 
