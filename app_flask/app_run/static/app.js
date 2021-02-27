@@ -202,6 +202,7 @@ d3.csv('../static/sfdata.csv').then((importedData) => {
   });
 });
 
+// ******************************************************************************
 var value = d3.json('/busi_bar').then((response) => {
   var years = [
     '2010',
@@ -287,17 +288,11 @@ function optionChangedNAICS(yearSelected) {
 var neighborValue = d3.json('/neigh_bar').then((response) => {
   years2 = [
     '2010',
-    '2011',
     '2012',
-    '2013',
     '2014',
-    '2015',
     '2016',
-    '2017',
     '2018',
-    '2019',
     '2020',
-    '2021',
   ];
 
   var dropdownMenu = d3.select('#selDataset2').selectAll('option');
@@ -311,9 +306,9 @@ var neighborValue = d3.json('/neigh_bar').then((response) => {
   optionChanged('2010');
 });
 
-function optionChanged(year2) {
+function optionChanged(year) {
 
-  console.log(typeof year2);
+  console.log(typeof year);
 
   const loader2 = document.querySelector('.loader2');
   loader2.style.visibility = 'visible';
@@ -327,7 +322,7 @@ function optionChanged(year2) {
     extra1 = [];
 
     for (var i = 0; i < response.length; i++) {
-      if (response[i].busi_start_year === year2) {
+      if (response[i].busi_start_year === year) {
         neighBor.push(response[i].neighborhood);
         countNeigh.push(response[i].busi_count);
       } else {
@@ -339,6 +334,7 @@ function optionChanged(year2) {
       x: neighBor,
       y: countNeigh,
       type: 'bar',
+      marker:{color:'#33ffe6'}
     };
 
     var data3 = [trace3];
@@ -374,3 +370,4 @@ function optionChanged(year2) {
     loader2.style.visibility = 'hidden';
   });
 }
+

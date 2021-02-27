@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import json
 import datetime
-from ps_wd import pswd
+# from ps_wd import pswd
 
 import sqlalchemy
 from sqlalchemy import create_engine, func
@@ -10,7 +10,7 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify
 from flask import Flask, render_template
 
-# pswd = 'postgres'
+pswd = 'postgres'
 
 engine = create_engine('postgresql://postgres:' +
                        pswd + '@localhost:5432/sfbusiness_db')
@@ -158,40 +158,6 @@ def neigh_bar_t():
 # *****************************************************************************************
 
 
-@app.route("/combined_data")
-def combined_neigh_bt():
-    # Establish connection with the database
-    engine = create_engine('postgresql://postgres:' +
-                           pswd + '@localhost:5432/sfbusiness_db')
-    connection = engine.connect()
-
-    results3 = pd.read_sql('SELECT * FROM sf_business', connection)
-    combined_n_bt = results3.groupby(['neighborhood'])[
-        'busi_type'].apply(pd.Series.value_counts)
-
-    combined_n_bt = combined_n_bt.to_frame().reset_index().rename(
-        columns={" ": "business_type", " ": "busi_count"})
-    combined_n_bt = combined_n_bt.rename(
-        columns={"level_1": "busi_type", "busi_type": "busi_count"})
-
-    return jsonify((combined_n_bt).to_dict("record"))
-
-
-# *****************************************************************************************
-# ************************************************************************************************************
-    # #Convert columns to array
-    # busistart_year_arr = busitype_final['busi_start_year'].to_list()
-    # busiype_arr = busitype_final['busi_type'].to_list()
-    # busicount_arr = busitype_final['busi_count'].to_list()
-
-    # busitype_dict = {'busistart_year':busistart_year_arr,
-    #                 'busitype': busiype_arr,
-    #                 'busicount': busicount_arr }
-
-    # json_data = json.dumps(busitype_dict)
-    # return(json_data)
-
-    # return jsonify((results).to_dict("record"))
 
 
 if __name__ == '__main__':
