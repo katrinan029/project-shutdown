@@ -1,5 +1,6 @@
 # project-2
 
+<<<<<<< HEAD
 Group 5 Project Shutdown Proposal
 
 ![](img/PS_Logo_T.png)
@@ -32,3 +33,6 @@ Python to create API
 CSS
 HTML
 Bootstrap
+=======
+![](Project-2/img/PS_Logo.png)
+>>>>>>> ff97b73059901e422935b621f62247f8a5535525
