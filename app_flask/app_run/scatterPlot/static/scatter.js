@@ -200,11 +200,9 @@ d3.json('/scatterPlot').then(function(Data, err) {
 
   // Create group for three y-axis labels
   var ylabelsGroup = chartGroup.append("g")
-  // .attr("transform", `translate(-25 ,${height/ 2})`);
     
 
   // // updateToolTip function above csv import
-  // var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
   var endLabel = ylabelsGroup.append("text")
   .attr("transform", "rotate(-90)")
   .attr("y", 0 - margin.left+20)
