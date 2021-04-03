@@ -99,7 +99,7 @@ To run our application, you will need to run the app.py file in the app_flask >>
 
 ![](img/leaflet.png)
 
-![](img/contact.png)
+
 
 
 
